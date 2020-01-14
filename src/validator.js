@@ -30,17 +30,6 @@ function setSettings(set) {
 function validate(user, callback) {
   const { name, email, password } = user;
 
-  const {
-    nameMin,
-    nameMax,
-    passwordMin,
-    passwordMax,
-    passwordMustContainUpper,
-    passwordMustContainNumber,
-    passwordSpecialCharacters
-  } = settings;
-  const passwordCharMustContain = settings.passwordCharMustContain.join();
-
   var errors = [];
   checkName(name, function(error) {
     errors.push(error);
@@ -69,6 +58,10 @@ function validate(user, callback) {
 }
 
 function checkName(name, callback) {
+  const {
+    nameMin,
+    nameMax
+  } = settings;
   if (name !== undefined) {
     /*Verifying name length*/
     name.length >= nameMin
@@ -98,6 +91,14 @@ function checkEmail(email, callback) {
 }
 
 function CheckPassword(password, callback) {
+  const {
+    passwordMin,
+    passwordMax,
+    passwordMustContainUpper,
+    passwordMustContainNumber,
+    passwordSpecialCharacters
+  } = settings;
+  const passwordCharMustContain = settings.passwordCharMustContain.join();
   if (password !== undefined) {
     /*Verifying password length*/
     password.length >= passwordMin

@@ -89,12 +89,12 @@ function CheckPassword(password, callback) {
   if (password !== undefined) {
     /*Verifying password length*/
     password.length >= passwordMin
-      ? ""
+      ? console.log(`Password length is equal or higher than ${passwordMin}`)
       : callback(
           `Password length should be equal or higher than ${passwordMin}`
         );
     password.length <= passwordMax
-      ? ""
+      ? console.log(`Password length is equal or less than ${passwordMax}`)
       : callback(`Password length should be equal or less than ${passwordMax}`);
 
     /*Verifying if password contains certain characters*/

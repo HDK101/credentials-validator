@@ -24,7 +24,6 @@ function useDefaultSettings() {
 
 function setSettings(set) {
   settings = Object.assign(settings, set);
-  console.table(settings);
 }
 
 function validate(user, callback) {

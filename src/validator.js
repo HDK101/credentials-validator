@@ -42,19 +42,7 @@ function validate(user, callback) {
   CheckPassword(password, function(error) {
     errors.push(error);
   });
-  if (errors) {
-    /*Clear duplicate or empty strings*/
-    var cleanedErrors = [];
-    for (var index = 0; index < errors.length; index++) {
-      error = errors[index];
-      if (!cleanedErrors.includes(error) & (error != "")) {
-        cleanedErrors.push(error);
-      }
-    }
-
-    /*Pass errors to callback*/
-    callback(cleanedErrors);
-  }
+  if (errors) callback(errors);
 }
 
 function checkName(name, callback) {

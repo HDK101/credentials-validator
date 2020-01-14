@@ -130,8 +130,8 @@ function CheckPassword(password, callback) {
         : callback("Forbidden characters in password");
     } else if (passwordSpecialCharacters == "permitted") {
       regexSpecial.test(password)
-        ? errors.push("Password doesn't contains special characters!")
-        : callback("Password contains special characters!");
+        ? callback("Password doesn't contains special characters!")
+        : console.log("Password contains special characters!");
     }
   } else if ((password !== undefined) & (password == "")) {
     return callback("Empty password!");

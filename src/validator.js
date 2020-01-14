@@ -23,56 +23,6 @@ function setSettings(set) {
   console.log(settings);
 }
 
-function validateClient(form) {
-  const { formName, elementNames } = form;
-  let { submitId, warningId } = form;
-  /*
-  Set default Ids
-  */
-  warningId = warningId ? warningId : "warning";
-  submitId = submitId ? submitId : "submit";
-
-  /*
-  Get elements
-  */
-  const currentForm = document.getElementById(formName);
-  if (!currentForm) return console.log(`Could not find form: ${formName}`);
-  const formElements = currentForm.elements;
-  const warning = document.getElementById(warningId);
-
-  /*
-  Verify form values
-  */
-  const name = elementNames.name ? formElements[elementNames.name].value : "";
-  const email = elementNames.email
-    ? formElements[elementNames.email].value
-    : "";
-  const password = elementNames.password
-    ? formElements[elementNames.password].value
-    : "";
-
-  const user = {
-    name: name,
-    email: email,
-    password: password
-  };
-
-  let errors = [];
-  validate(user, elementNames, function(errs) {
-    errors = errs;
-  });
-
-  if (errors.length > 0) {
-    /*Join all errors in HTML*/
-    const errorsHTML = errors.join("<br>");
-    warning.innerHTML = errorsHTML;
-    return false;
-  } else if (errors.length == 0) {
-    warning.innerHTML = "";
-    return true;
-  }
-}
-
 function validate(user, elementNames, callback) {
   const { name, email, password } = user;
 

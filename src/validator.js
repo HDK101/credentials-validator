@@ -6,7 +6,6 @@ var settings = {
   passwordCharMustContain: [],
   passwordMustContainUpper: false,
   passwordMustContainNumber: false,
-  passwordMustContainSpace: false,
   passwordSpecialCharacters: "forbidden",
   emailMustContain: ["@", "."]
 };
@@ -18,6 +17,9 @@ function useDefaultSettings() {
     passwordMin: 8,
     passwordMax: 20,
     passwordCharMustContain: [],
+    passwordMustContainUpper: false,
+    passwordMustContainNumber: false,
+    passwordSpecialCharacters: "forbidden",
     emailMustContain: ["@", "."]
   };
 }
@@ -45,10 +47,7 @@ function validate(user, callback) {
 }
 
 function checkName(name, callback) {
-  const {
-    nameMin,
-    nameMax
-  } = settings;
+  const { nameMin, nameMax } = settings;
   if (name !== undefined) {
     /*Verifying name length*/
     name.length >= nameMin
@@ -83,9 +82,9 @@ function CheckPassword(password, callback) {
     passwordMax,
     passwordMustContainUpper,
     passwordMustContainNumber,
-    passwordSpecialCharacters
+    passwordSpecialCharacters,
+    passwordCharMustContain
   } = settings;
-  const passwordCharMustContain = settings.passwordCharMustContain.join();
   if (password !== undefined) {
     /*Verifying password length*/
     password.length >= passwordMin
@@ -101,7 +100,7 @@ function CheckPassword(password, callback) {
     if (passwordCharMustContain) {
       const errorText = "Password should contain this character: ";
       passwordCharMustContain.forEach(element => {
-        if (!password.includes(element))  callback(`${errorText}${element}`);
+        if (!password.includes(element)) callback(`${errorText}${element}`);
       });
     }
 
@@ -137,4 +136,11 @@ function CheckPassword(password, callback) {
   }
 }
 
-module.exports = { useDefaultSettings, setSettings, validate, checkName, checkEmail, CheckPassword };
+module.exports = {
+  useDefaultSettings,
+  setSettings,
+  validate,
+  checkName,
+  checkEmail,
+  CheckPassword
+};

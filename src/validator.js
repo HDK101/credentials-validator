@@ -23,7 +23,7 @@ function setSettings(set) {
   console.log(settings);
 }
 
-function validate(user, elementNames, callback) {
+function validate(user, callback) {
   const { name, email, password } = user;
 
   const {
@@ -31,12 +31,12 @@ function validate(user, elementNames, callback) {
     nameMax,
     passwordMin,
     passwordMax,
-    passwordCharMustContain,
     emailMustContain
   } = settings;
+  const passwordCharMustContain = settings.passwordCharMustContain.join();
 
   var errors = [];
-  if (name) {
+  if (name !== undefined) {
     const nameMinError =
       name.length >= nameMin
         ? ""
@@ -46,10 +46,10 @@ function validate(user, elementNames, callback) {
         ? ""
         : `Name length should be equal or less than ${nameMax}`;
     errors.push(nameMinError, nameMaxError);
-  } else if (elementNames.name) {
+  } else if (name !== undefined & name == "") {
     errors.push("Empty name!");
   }
-  if (email) {
+  if (email !== undefined) {
     const emailParts = email.split("@");
     const emailProvider = emailParts.length > 1 ? emailParts[1].split(".") : [];
 
@@ -60,16 +60,16 @@ function validate(user, elementNames, callback) {
     if (!emailProvider[0]) errors.push("Invalid email!");
 
     /*Verify if email has the necessary characters*/
-    for (var index = 0; index < emailMustContain.length; index++) {
-      if (!email.includes(emailMustContain[index])) {
-        errors.push("Invalid email!");
-        break;
-      }
-    }
-  } else if (elementNames.email) {
+    // for (var index = 0; index < emailMustContain.length; index++) {
+    //   if (!email.includes(emailMustContain[index])) {
+    //     errors.push("Invalid email!");
+    //     break;
+    //   }
+    // }
+  } else if (email !== undefined & email == "") {
     errors.push("Empty email!");
   }
-  if (password) {
+  if (password !== undefined) {
     const passwordMinError =
       password.length >= passwordMin
         ? ""
@@ -84,10 +84,10 @@ function validate(user, elementNames, callback) {
     if (passwordCharMustContain) {
       const errorText = "Password should contain this character: ";
       passwordCharMustContain.forEach(element => {
-        if (password.includes(element)) errors.push(`${errorText}${element}`);
+        if (!password.includes(element)) errors.push(`${errorText}${element}`);
       });
     }
-  } else if (elementNames.password) {
+  } else if (password !== undefined & password == "") {
     errors.push("Empty password!");
   }
   if (errors) {
@@ -105,6 +105,4 @@ function validate(user, elementNames, callback) {
   }
 }
 
-if (typeof process !== "undefined") {
-  module.exports = { useDefaultSettings, setSettings, validate };
-}
+module.exports = { useDefaultSettings, setSettings, validate };

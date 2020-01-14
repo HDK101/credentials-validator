@@ -4,7 +4,7 @@
   "description": "A simple credential validator",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "run": "node index.js"
   },
   "keywords": [
@@ -16,5 +16,8 @@
     "Register"
   ],
   "author": "EMKBRO",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
 }

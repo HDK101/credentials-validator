@@ -129,5 +129,12 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     console.table(errors);
     expect(errors.length).toBe(0);
   });
+  test("checkEmail, should not return an error", () => {
+    validator.checkEmail(specialCharUser.email, function(error) {
+      errors.push(error);
+    });
+    console.table(errors);
+    expect(errors.length).toBe(0);
+  });
   
 });

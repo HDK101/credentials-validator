@@ -6,7 +6,7 @@ describe("Validate function, default settings", () => {
         email: "anniecare@gmail.com",
         password: "Password10"
     }
-    test("return no errors for a valid user", () => {
+    test("returns no errors for a valid user", () => {
         let errors = [];
         validator.validate(user, function(errs) {
             errors = errs;

@@ -1,0 +1,19 @@
+{
+  "name": "credentials-validator",
+  "version": "0.1.0",
+  "description": "A simple credential validator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Validator",
+    "Credentials",
+    "Password",
+    "Email",
+    "Login",
+    "Register"
+  ],
+  "author": "EMKBRO",
+  "license": "MIT"
+}

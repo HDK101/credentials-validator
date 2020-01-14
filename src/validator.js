@@ -138,4 +138,4 @@ function CheckPassword(password, callback) {
   }
 }
 
-module.exports = { settings, useDefaultSettings, setSettings, validate };
+module.exports = { useDefaultSettings, setSettings, validate, checkName, checkEmail, CheckPassword };

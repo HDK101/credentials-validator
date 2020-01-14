@@ -40,7 +40,7 @@ function validate(user, callback) {
     errors.push(error);
   });
 
-  CheckPassword(password, function(error) {
+  checkPassword(password, function(error) {
     errors.push(error);
   });
   if (errors) callback(errors);
@@ -76,7 +76,7 @@ function checkEmail(email, callback) {
   }
 }
 
-function CheckPassword(password, callback) {
+function checkPassword(password, callback) {
   const {
     passwordMin,
     passwordMax,
@@ -142,5 +142,9 @@ module.exports = {
   validate,
   checkName,
   checkEmail,
-  CheckPassword
+  checkPassword
+};
+
+module.exports = function getSettings() {
+  return settings;
 };

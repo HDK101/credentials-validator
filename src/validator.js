@@ -9,6 +9,32 @@ var settings = {
   passwordSpecialCharactersPermit: false
 };
 
+var errorMessages = {
+  errorNameEmpty: "Empty name!",
+  errorNameMin: "Name too short, min length: __VALUE__.",
+  errorNameMax: "Name too long, max length: __VALUE__.",
+  errorEmailEmpty: "Empty email!",
+  errorEmailInvalid: "Invalid email adress!",
+  errorPasswordEmpty: "Empty password!",
+  errorPasswordMin: "Password too short, min length: __VALUE__",
+  errorPasswordMax: "Password too long, max length: __VALUE__",
+  errorPasswordUpper: "Password should contain at last 1 uppercase!",
+  errorPasswordNumber: "Password should contain at last 1 number!",
+  errorPasswordSpecialFalse: "Forbidden characters in password",
+  errorPasswordSpecialTrue:
+    "Password should contain at last 1 special characters!"
+};
+
+function setErrorMessages(messages) {
+  errorMessages = Object.assign(errorMessages, messages);
+}
+
+function getErrorMessage(messageName, value) {
+  let message = errorMessages[`${messageName}`];
+  if (message != undefined)
+    return value ? message.replace("__VALUE__", value) : message;
+}
+
 function useDefaultSettings() {
   settings = {
     nameMin: 5,
@@ -48,10 +74,10 @@ function checkName(name, callback) {
   const { nameMin, nameMax } = settings;
   if (name !== undefined) {
     /*Verifying name length*/
-    name.length < nameMin && callback(`Name too short, min length: ${nameMin}`);
-    name.length > nameMax && callback(`Name too long, max length: ${nameMax}`);
+    name.length < nameMin && callback(getErrorMessage("errorNameMin", nameMin));
+    name.length > nameMax && callback(getErrorMessage("errorNameMax", nameMax));
   } else if ((name !== undefined) & (name == "")) {
-    return callback(`Empty name`);
+    return callback(getErrorMessage("errorNameEmpty"));
   }
 }
 
@@ -61,12 +87,13 @@ function checkEmail(email, callback) {
     const emailProvider = emailParts.length > 1 ? emailParts[1].split(".") : [];
 
     /*Verify if exists a value before @*/
-    if (!emailParts[0]) return callback("Invalid email!");
+    if (!emailParts[0]) return callback(getErrorMessage("errorEmailInvalid"));
 
     /*Verify if is an valid email provider*/
-    if (!emailProvider[0]) return callback("Invalid email!");
+    if (!emailProvider[0])
+      return callback(getErrorMessage("errorEmailInvalid"));
   } else if ((email !== undefined) & (email == "")) {
-    return callback("Empty email!");
+    return callback(getErrorMessage("errorEmailEmpty"));
   }
 }
 
@@ -82,43 +109,35 @@ function checkPassword(password, callback) {
   if (password !== undefined) {
     /*Verifying password length*/
     password.length < passwordMin &&
-      callback(`Password too short, min length: ${passwordMin}`);
+      callback(getErrorMessage("errorPasswordMin", passwordMin));
     password.length > passwordMax &&
-      callback(`Password too long, max length: ${passwordMax}`);
-
-    /*Verifying if password contains certain characters*/
-    if (passwordCharMustContain) {
-      const errorText = "Password should contain this character: ";
-      passwordCharMustContain.forEach(element => {
-        if (!password.includes(element)) callback(`${errorText}${element}`);
-      });
-    }
+      callback(getErrorMessage("errorPasswordMin", passwordMax));
 
     /*Verify if password contains uppercase*/
     regexUpper = /[A-Z]/;
     if (passwordMustContainUpper) {
       !regexUpper.test(password) &&
-        callback("Password should contain at last 1 uppercase");
+        callback(getErrorMessage("errorPasswordUpper"));
     }
 
     /*Verify if password contains number*/
     regexNumber = /[0-9]/;
     if (passwordMustContainNumber) {
       !regexNumber.test(password) &&
-        callback("Password should contain at last 1 number");
+        callback(getErrorMessage("errorPasswordNumber"));
     }
 
     /*Verify if password has special characters*/
     regexSpecial = /^[A-Za-z0-9 ]+$/;
     if (!passwordSpecialCharactersPermit) {
       !regexSpecial.test(password) &&
-        callback("Forbidden characters in password");
+        callback(getErrorMessage("errorPasswordSpecialFalse"));
     } else if (passwordSpecialCharactersPermit) {
       regexSpecial.test(password) &&
-        callback("Password should contain at last 1 special characters!");
+        callback(getErrorMessage("errorPasswordSpecialTrue"));
     }
   } else if ((password !== undefined) & (password == "")) {
-    return callback("Empty password!");
+    return callback(getErrorMessage("errorPasswordEmpty"));
   }
 }
 

@@ -1,4 +1,5 @@
-# credentials-validator
+# Credentials Validator
+![npm](https://img.shields.io/npm/v/credentials-validator)
 ### A quick way to validate credentials in server-side
 
 

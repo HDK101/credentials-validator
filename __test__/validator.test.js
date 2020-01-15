@@ -140,4 +140,16 @@ describe("empty name, email and password", () => {
     });
     expect(errors.length).toBe(0);
   });
+  test("email", () => {
+    validator.checkEmail(emptyUser.email,function(errs) {
+      errors.push(errs);
+    });
+    expect(errors.length).toBe(0);
+  });
+  test("password", () => {
+    validator.checkPassword(emptyUser.password,function(errs) {
+      errors.push(errs);
+    });
+    expect(errors.length).toBe(0);
+  });
 });

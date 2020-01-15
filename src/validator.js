@@ -48,14 +48,10 @@ function checkName(name, callback) {
   const { nameMin, nameMax } = settings;
   if (name !== undefined) {
     /*Verifying name length*/
-    name.length >= nameMin
-      ? console.log("√ Name length is equal or higher than min!")
-      : callback(`Name length should be equal or higher than ${nameMin}`);
-    name.length <= nameMax
-      ? console.log("√ Name length is equal or less than max!")
-      : callback(`Name length should be equal or less than ${nameMax}`);
+    name.length < nameMin && callback(`Name too short, min length: ${nameMin}`);
+    name.length > nameMax && callback(`Name too long, max length: ${nameMax}`);
   } else if ((name !== undefined) & (name == "")) {
-    return callback(`Name length should be equal or higher than ${nameMin}`);
+    return callback(`Empty name`);
   }
 }
 
@@ -69,7 +65,6 @@ function checkEmail(email, callback) {
 
     /*Verify if is an valid email provider*/
     if (!emailProvider[0]) return callback("Invalid email!");
-    return console.log("√ Valid email");
   } else if ((email !== undefined) & (email == "")) {
     return callback("Empty email!");
   }
@@ -86,14 +81,10 @@ function checkPassword(password, callback) {
   } = settings;
   if (password !== undefined) {
     /*Verifying password length*/
-    password.length >= passwordMin
-      ? console.log(`√ Password length is equal or higher than ${passwordMin}`)
-      : callback(
-          `Password length should be equal or higher than ${passwordMin}`
-        );
-    password.length <= passwordMax
-      ? console.log(`√ Password length is equal or less than ${passwordMax}`)
-      : callback(`Password length should be equal or less than ${passwordMax}`);
+    password.length < passwordMin &&
+      callback(`Password too short, min length: ${passwordMin}`);
+    password.length > passwordMax &&
+      callback(`Password too long, max length: ${passwordMax}`);
 
     /*Verifying if password contains certain characters*/
     if (passwordCharMustContain) {
@@ -106,29 +97,25 @@ function checkPassword(password, callback) {
     /*Verify if password contains uppercase*/
     regexUpper = /[A-Z]/;
     if (passwordMustContainUpper) {
-      regexUpper.test(password)
-        ? console.log("√ Password contains uppercase!")
-        : callback("Password should contain at last 1 uppercase");
+      !regexUpper.test(password) &&
+        callback("Password should contain at last 1 uppercase");
     }
 
     /*Verify if password contains number*/
     regexNumber = /[0-9]/;
     if (passwordMustContainNumber) {
-      regexNumber.test(password)
-        ? console.log("√ Password contains number!")
-        : callback("Password should contain at last 1 number");
+      !regexNumber.test(password) &&
+        callback("Password should contain at last 1 number");
     }
 
     /*Verify if password has special characters*/
     regexSpecial = /^[A-Za-z0-9 ]+$/;
     if (!passwordSpecialCharactersPermit) {
-      regexSpecial.test(password)
-        ? console.log("√ Password doesn't contains special characters!")
-        : callback("Forbidden characters in password");
+      !regexSpecial.test(password) &&
+        callback("Forbidden characters in password");
     } else if (passwordSpecialCharactersPermit) {
-      regexSpecial.test(password)
-        ? callback("Password should contain at last 1 special characters!")
-        : console.log("√ Password contains special characters!");
+      regexSpecial.test(password) &&
+        callback("Password should contain at last 1 special characters!");
     }
   } else if ((password !== undefined) & (password == "")) {
     return callback("Empty password!");

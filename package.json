@@ -2,10 +2,9 @@
   "name": "credentials-validator",
   "version": "0.1.0",
   "description": "A simple credential validator",
-  "main": "index.js",
+  "main": "./src/validator.js",
   "scripts": {
-    "test": "jest",
-    "run": "node index.js"
+    "test": "jest"
   },
   "keywords": [
     "Validator",

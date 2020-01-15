@@ -49,10 +49,10 @@ function checkName(name, callback) {
   if (name !== undefined) {
     /*Verifying name length*/
     name.length >= nameMin
-      ? console.log("Name length is equal or higher than min!")
+      ? console.log("√ Name length is equal or higher than min!")
       : callback(`Name length should be equal or higher than ${nameMin}`);
     name.length <= nameMax
-      ? console.log("Name length is equal or less than max!")
+      ? console.log("√ Name length is equal or less than max!")
       : callback(`Name length should be equal or less than ${nameMax}`);
   } else if ((name !== undefined) & (name == "")) {
     return callback(`Name length should be equal or higher than ${nameMin}`);
@@ -69,6 +69,7 @@ function checkEmail(email, callback) {
 
     /*Verify if is an valid email provider*/
     if (!emailProvider[0]) return callback("Invalid email!");
+    return console.log("√ Valid email");
   } else if ((email !== undefined) & (email == "")) {
     return callback("Empty email!");
   }
@@ -86,12 +87,12 @@ function checkPassword(password, callback) {
   if (password !== undefined) {
     /*Verifying password length*/
     password.length >= passwordMin
-      ? console.log(`Password length is equal or higher than ${passwordMin}`)
+      ? console.log(`√ Password length is equal or higher than ${passwordMin}`)
       : callback(
           `Password length should be equal or higher than ${passwordMin}`
         );
     password.length <= passwordMax
-      ? console.log(`Password length is equal or less than ${passwordMax}`)
+      ? console.log(`√ Password length is equal or less than ${passwordMax}`)
       : callback(`Password length should be equal or less than ${passwordMax}`);
 
     /*Verifying if password contains certain characters*/
@@ -106,7 +107,7 @@ function checkPassword(password, callback) {
     regexUpper = /[A-Z]/;
     if (passwordMustContainUpper) {
       regexUpper.test(password)
-        ? console.log("Password contains uppercase!")
+        ? console.log("√ Password contains uppercase!")
         : callback("Password should contain at last 1 uppercase");
     }
 
@@ -114,7 +115,7 @@ function checkPassword(password, callback) {
     regexNumber = /[0-9]/;
     if (passwordMustContainNumber) {
       regexNumber.test(password)
-        ? console.log("Password contains number!")
+        ? console.log("√ Password contains number!")
         : callback("Password should contain at last 1 number");
     }
 
@@ -122,12 +123,12 @@ function checkPassword(password, callback) {
     regexSpecial = /^[A-Za-z0-9 ]+$/;
     if (!passwordSpecialCharactersPermit) {
       regexSpecial.test(password)
-        ? console.log("Password doesn't contains special characters!")
+        ? console.log("√ Password doesn't contains special characters!")
         : callback("Forbidden characters in password");
     } else if (passwordSpecialCharactersPermit) {
       regexSpecial.test(password)
         ? callback("Password doesn't contains special characters!")
-        : console.log("Password contains special characters!");
+        : console.log(" √Password contains special characters!");
     }
   } else if ((password !== undefined) & (password == "")) {
     return callback("Empty password!");

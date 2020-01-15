@@ -144,6 +144,7 @@ function checkPassword(password, callback) {
 module.exports = {
   useDefaultSettings,
   setSettings,
+  setErrorMessages,
   validate,
   checkName,
   checkEmail,

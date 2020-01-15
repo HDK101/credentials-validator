@@ -6,8 +6,7 @@ var settings = {
   passwordCharMustContain: [],
   passwordMustContainUpper: false,
   passwordMustContainNumber: false,
-  passwordSpecialCharacters: "forbidden",
-  emailMustContain: ["@", "."]
+  passwordSpecialCharactersPermit: false
 };
 
 function useDefaultSettings() {
@@ -19,8 +18,7 @@ function useDefaultSettings() {
     passwordCharMustContain: [],
     passwordMustContainUpper: false,
     passwordMustContainNumber: false,
-    passwordSpecialCharacters: "forbidden",
-    emailMustContain: ["@", "."]
+    passwordSpecialCharactersPermit: true
   };
 }
 
@@ -82,7 +80,7 @@ function checkPassword(password, callback) {
     passwordMax,
     passwordMustContainUpper,
     passwordMustContainNumber,
-    passwordSpecialCharacters,
+    passwordSpecialCharactersPermit,
     passwordCharMustContain
   } = settings;
   if (password !== undefined) {
@@ -120,13 +118,13 @@ function checkPassword(password, callback) {
         : callback("Password should contain at last 1 number");
     }
 
-    /*Verify if password*/
+    /*Verify if password has special characters*/
     regexSpecial = /^[A-Za-z0-9 ]+$/;
-    if (passwordSpecialCharacters == "forbidden") {
+    if (!passwordSpecialCharactersPermit) {
       regexSpecial.test(password)
         ? console.log("Password doesn't contains special characters!")
         : callback("Forbidden characters in password");
-    } else if (passwordSpecialCharacters == "permitted") {
+    } else if (passwordSpecialCharactersPermit) {
       regexSpecial.test(password)
         ? callback("Password doesn't contains special characters!")
         : console.log("Password contains special characters!");
@@ -143,8 +141,4 @@ module.exports = {
   checkName,
   checkEmail,
   checkPassword
-};
-
-module.exports = function getSettings() {
-  return settings;
 };

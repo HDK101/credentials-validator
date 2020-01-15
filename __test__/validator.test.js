@@ -52,7 +52,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
       passwordMin: 10
     });
-    validator.CheckPassword(user.password, function(error) {
+    validator.checkPassword(user.password, function(error) {
       errors.push(error);
     });
     console.table(errors);
@@ -63,7 +63,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
       passwordMin: 1,
       passwordMax: 3
     });
-    validator.CheckPassword(user.password, function(error) {
+    validator.checkPassword(user.password, function(error) {
       errors.push(error);
     });
     console.table(errors);
@@ -78,7 +78,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
       passwordCharMustContain: ["w", "o"]
     });
-    validator.CheckPassword(anotherUser.password, function(error) {
+    validator.checkPassword(anotherUser.password, function(error) {
       errors.push(error);
     });
     console.table(errors);
@@ -88,7 +88,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
       passwordMustContainUpper: true
     });
-    validator.CheckPassword(anotherUser.password, function(error) {
+    validator.checkPassword(anotherUser.password, function(error) {
       errors.push(error);
     });
     console.table(errors);
@@ -98,7 +98,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
       passwordMustContainNumber: true
     });
-    validator.CheckPassword(anotherUser.password, function(error) {
+    validator.checkPassword(anotherUser.password, function(error) {
       errors.push(error);
     });
     console.table(errors);
@@ -113,7 +113,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
         passwordSpecialCharacters: "forbidden"
     });
-    validator.CheckPassword(specialCharUser.password, function(error) {
+    validator.checkPassword(specialCharUser.password, function(error) {
       errors.push(error);
     });
     console.table(errors);
@@ -123,7 +123,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
         passwordSpecialCharacters: "permitted"
     });
-    validator.CheckPassword(specialCharUser.password, function(error) {
+    validator.checkPassword(specialCharUser.password, function(error) {
       errors.push(error);
     });
     console.table(errors);

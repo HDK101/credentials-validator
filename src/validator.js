@@ -3,7 +3,6 @@ var settings = {
   nameMax: 15,
   passwordMin: 8,
   passwordMax: 20,
-  passwordCharMustContain: [],
   passwordMustContainUpper: false,
   passwordMustContainNumber: false,
   passwordSpecialCharactersPermit: false
@@ -41,7 +40,6 @@ function useDefaultSettings() {
     nameMax: 15,
     passwordMin: 8,
     passwordMax: 20,
-    passwordCharMustContain: [],
     passwordMustContainUpper: false,
     passwordMustContainNumber: false,
     passwordSpecialCharactersPermit: false
@@ -104,7 +102,6 @@ function checkPassword(password, callback) {
     passwordMustContainUpper,
     passwordMustContainNumber,
     passwordSpecialCharactersPermit,
-    passwordCharMustContain
   } = settings;
   if (password !== undefined) {
     /*Verifying password length*/

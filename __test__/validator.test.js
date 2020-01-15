@@ -109,9 +109,9 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     email: "johncare@gmail.com",
     password: "Password!0"
   };
-  test("passwordSpecialCharacters: 'forbidden', should return an error", () => {
+  test("passwordSpecialCharacters: false, should return an error", () => {
     validator.setSettings({
-        passwordSpecialCharacters: "forbidden"
+        passwordSpecialCharactersPermit: false
     });
     validator.checkPassword(specialCharUser.password, function(error) {
       errors.push(error);
@@ -119,9 +119,9 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     console.table(errors);
     expect(errors[0]).not.toBeFalsy();
   });
-  test("passwordSpecialCharacters: 'permitted', should not return an error", () => {
+  test("passwordSpecialCharacters: true, should not return an error", () => {
     validator.setSettings({
-        passwordSpecialCharacters: "permitted"
+        passwordSpecialCharactersPermit: true
     });
     validator.checkPassword(specialCharUser.password, function(error) {
       errors.push(error);

@@ -138,18 +138,18 @@ describe("empty name, email and password", () => {
     validator.checkName(emptyUser.name,function(errs) {
       errors.push(errs);
     });
-    expect(errors.length).toBe(0);
+    expect(errors[0]).not.toBeFalsy();
   });
   test("email", () => {
     validator.checkEmail(emptyUser.email,function(errs) {
       errors.push(errs);
     });
-    expect(errors.length).toBe(0);
+    expect(errors[0]).not.toBeFalsy();
   });
   test("password", () => {
     validator.checkPassword(emptyUser.password,function(errs) {
       errors.push(errs);
     });
-    expect(errors.length).toBe(0);
+    expect(errors[0]).not.toBeFalsy();
   });
 });

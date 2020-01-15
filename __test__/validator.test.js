@@ -74,16 +74,6 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     email: "johncare@gmail.com",
     password: "Password0"
   };
-  test("passwordCharMustContain: ['w','o'], should not return an error", () => {
-    validator.setSettings({
-      passwordCharMustContain: ["w", "o"]
-    });
-    validator.checkPassword(anotherUser.password, function(error) {
-      errors.push(error);
-    });
-    console.table(errors);
-    expect(errors.length).toBe(0);
-  });
   test("passwordMustContainUpper, should not return an error", () => {
     validator.setSettings({
       passwordMustContainUpper: true

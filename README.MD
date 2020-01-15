@@ -95,7 +95,7 @@ It will print...
 └─────────┴──────────────────────────────────┘
 ```
 
-###Other things you must know
+### Other things you must know
 ```
 
 //A method that individually checks a name

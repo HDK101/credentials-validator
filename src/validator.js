@@ -10,8 +10,8 @@ var settings = {
 
 var errorMessages = {
   errorNameEmpty: "Empty name!",
-  errorNameMin: "Name too short, min length: __VALUE__.",
-  errorNameMax: "Name too long, max length: __VALUE__.",
+  errorNameMin: "Name too short, min length: __VALUE__",
+  errorNameMax: "Name too long, max length: __VALUE__",
   errorEmailEmpty: "Empty email!",
   errorEmailInvalid: "Invalid email adress!",
   errorPasswordEmpty: "Empty password!",

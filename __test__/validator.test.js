@@ -31,8 +31,8 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
       nameMin: 10
     });
-    validator.checkName(user.name, function(error) {
-      errors.push(error);
+    validator.checkName(user.name, function(errs) {
+      errors.push(errs);
     });
     console.table(errors);
     expect(errors[0]).not.toBeFalsy();
@@ -42,8 +42,8 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
       nameMax: 3,
       nameMin: 1
     });
-    validator.checkName(user.name, function(error) {
-      errors.push(error);
+    validator.checkName(user.name, function(errs) {
+      errors.push(errs);
     });
     console.table(errors);
     expect(errors[0]).not.toBeFalsy();
@@ -52,8 +52,8 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
       passwordMin: 10
     });
-    validator.checkPassword(user.password, function(error) {
-      errors.push(error);
+    validator.checkPassword(user.password, function(errs) {
+      errors.push(errs);
     });
     console.table(errors);
     expect(errors[0]).not.toBeFalsy();
@@ -63,8 +63,8 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
       passwordMin: 1,
       passwordMax: 3
     });
-    validator.checkPassword(user.password, function(error) {
-      errors.push(error);
+    validator.checkPassword(user.password, function(errs) {
+      errors.push(errs);
     });
     console.table(errors);
     expect(errors[0]).not.toBeFalsy();
@@ -78,8 +78,8 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
       passwordMustContainUpper: true
     });
-    validator.checkPassword(anotherUser.password, function(error) {
-      errors.push(error);
+    validator.checkPassword(anotherUser.password, function(errs) {
+      errors.push(errs);
     });
     console.table(errors);
     expect(errors.length).toBe(0);
@@ -88,8 +88,8 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.setSettings({
       passwordMustContainNumber: true
     });
-    validator.checkPassword(anotherUser.password, function(error) {
-      errors.push(error);
+    validator.checkPassword(anotherUser.password, function(errs) {
+      errors.push(errs);
     });
     console.table(errors);
     expect(errors.length).toBe(0);
@@ -101,30 +101,43 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
   };
   test("passwordSpecialCharacters: false, should return an error", () => {
     validator.setSettings({
-        passwordSpecialCharactersPermit: false
+      passwordSpecialCharactersPermit: false
     });
-    validator.checkPassword(specialCharUser.password, function(error) {
-      errors.push(error);
+    validator.checkPassword(specialCharUser.password, function(errs) {
+      errors.push(errs);
     });
     console.table(errors);
     expect(errors[0]).not.toBeFalsy();
   });
   test("passwordSpecialCharacters: true, should not return an error", () => {
     validator.setSettings({
-        passwordSpecialCharactersPermit: true
+      passwordSpecialCharactersPermit: true
     });
-    validator.checkPassword(specialCharUser.password, function(error) {
-      errors.push(error);
+    validator.checkPassword(specialCharUser.password, function(errs) {
+      errors.push(errs);
     });
     console.table(errors);
     expect(errors.length).toBe(0);
   });
   test("checkEmail, should not return an error", () => {
-    validator.checkEmail(specialCharUser.email, function(error) {
-      errors.push(error);
+    validator.checkEmail(specialCharUser.email, function(errs) {
+      errors.push(errs);
     });
     console.table(errors);
     expect(errors.length).toBe(0);
   });
-  
+});
+
+describe("empty name, email and password", () => {
+  const emptyUser = {
+    name:"",
+    email:"",
+    password:""
+  };
+  test("name", () => {
+    validator.checkName(emptyUser.name,function(errs) {
+      errors.push(errs);
+    });
+    expect(errors.length).toBe(0);
+  });
 });

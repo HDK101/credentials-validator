@@ -1,5 +1,6 @@
 # Credentials Validator
 ![npm](https://img.shields.io/npm/v/credentials-validator)
+[![Build Status](https://travis-ci.com/HDK101/credentials-validator.svg?branch=master)](https://travis-ci.com/HDK101/credentials-validator)
 ### A quick way to validate credentials in server-side
 
 

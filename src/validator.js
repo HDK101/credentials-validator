@@ -18,7 +18,7 @@ function useDefaultSettings() {
     passwordCharMustContain: [],
     passwordMustContainUpper: false,
     passwordMustContainNumber: false,
-    passwordSpecialCharactersPermit: true
+    passwordSpecialCharactersPermit: false
   };
 }
 
@@ -128,7 +128,7 @@ function checkPassword(password, callback) {
     } else if (passwordSpecialCharactersPermit) {
       regexSpecial.test(password)
         ? callback("Password doesn't contains special characters!")
-        : console.log(" √Password contains special characters!");
+        : console.log("√ Password contains special characters!");
     }
   } else if ((password !== undefined) & (password == "")) {
     return callback("Empty password!");

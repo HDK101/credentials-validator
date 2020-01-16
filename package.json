@@ -14,7 +14,13 @@
     "Login",
     "Register"
   ],
+  "url": "https://github.com/HDK101/credentials-validator/issues",
+  "email": "lucashideki87@gmail.com",
   "author": "EMKBRO",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/HDK101/credentials-validator.git"
+  },  
   "license": "MIT",
   "devDependencies": {
     "jest": "^24.9.0"

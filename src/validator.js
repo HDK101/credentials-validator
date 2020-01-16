@@ -19,17 +19,15 @@ var errorMessages = {
   errorPasswordMax: "Password too long, max length: __VALUE__",
   errorPasswordUpper: "Password should contain at last 1 uppercase!",
   errorPasswordNumber: "Password should contain at last 1 number!",
-  errorPasswordSpecialFalse: "Forbidden characters in password",
-  errorPasswordSpecialTrue:
-    "Password should contain at last 1 special characters!"
+  errorPasswordSpecialFalse: "Forbidden characters in password"
 };
 
 function setErrorMessages(messages) {
   errorMessages = Object.assign(errorMessages, messages);
 }
 
-function getErrorMessage(messageName, value) {
-  let message = errorMessages[`${messageName}`];
+function getErrorMessage(errorName, value) {
+  let message = errorMessages[`${errorName}`];
   if (message != undefined)
     return value ? message.replace("__VALUE__", value) : message;
 }
@@ -49,6 +47,10 @@ function useDefaultSettings() {
 function setSettings(set) {
   settings = Object.assign(settings, set);
 }
+
+/*
+Default validate
+*/
 
 function validate(user, callback) {
   const { name, email, password } = user;
@@ -138,12 +140,98 @@ function checkPassword(password, callback) {
       if (!passwordSpecialCharactersPermit) {
         !regexSpecial.test(password) &&
           callback(getErrorMessage("errorPasswordSpecialFalse"));
-      } else if (passwordSpecialCharactersPermit) {
-        regexSpecial.test(password) &&
-          callback(getErrorMessage("errorPasswordSpecialTrue"));
       }
     } else if (password === "") {
       return callback(getErrorMessage("errorPasswordEmpty"));
+    }
+  }
+}
+
+function checkCustom(
+  credential,
+  name,
+  callback,
+  customSettings,
+  customErrorMessages
+) {
+  let cSettings = {
+    min: 0,
+    max: 0,
+    mustContainWord: [],
+    mustContainUpper: false,
+    mustContainNumber: false,
+    specialCharactersPermit: true
+  };
+  cSettings = Object.assign(cSettings, customSettings);
+  const {
+    min,
+    max,
+    mustContainWord,
+    mustContainUpper,
+    mustContainNumber,
+    specialCharactersPermit
+  } = cSettings;
+
+  function getCustomErrorMessage(errorName, cName, value) {
+    let message = cErrorMessages[`${errorName}`];
+    if (message != undefined) {
+      replacedValueMessage = value
+        ? message.replace("__VALUE__", value)
+        : message;
+      return replacedValueMessage.replace("__NAME__", cName);
+    }
+    return message;
+  }
+
+  if (!name) return console.log("Crendetial name required!");
+  let cErrorMessages = {
+    errorEmpty: "Empty __NAME__!",
+    errorMin: "__NAME__ too short, min length: __VALUE__",
+    errorMax: "__NAME__ too long, max length: __VALUE__",
+    errorWord: "__NAME__ should contain this word: __VALUE__",
+    errorUpper: "__NAME__ should contain at last 1 uppercase!",
+    errorNumber: "__NAME__ should contain at last 1 number!",
+    errorSpecialFalse: "Forbidden characters in __NAME__",
+    errorSpecialTrue: "__NAME__ should contain at last 1 special characters!"
+  };
+  cErrorMessages = Object.assign(cErrorMessages, customErrorMessages);
+
+  if (credential !== undefined) {
+    if (credential !== "") {
+      /*Min/max length verification*/
+
+      (min > 0) & (credential.length < min) &&
+        callback(getCustomErrorMessage("errorMin", name, min));
+      (max > 0) & (credential.length > max) &&
+        callback(getCustomErrorMessage("errorMax", name, max));
+
+      /*Check if credentials has required words*/
+      if (mustContainWord) {
+        mustContainWord.forEach(element => {
+          !credential.includes(element) &&
+            callback(getCustomErrorMessage("errorWord", name, element));
+        });
+      }
+      /*Check if credential has at last 1 uppercase*/
+      if (mustContainUpper) {
+        regexUpper = /[A-Z]/;
+        !regexUpper.test(credential) &&
+          callback(getCustomErrorMessage("errorUpper", name));
+      }
+      /*Check if credential has at last 1 number*/
+      if (mustContainNumber) {
+        regexNumber = /[0-9]/;
+        !regexNumber.test(credential) &&
+          callback(getCustomErrorMessage("errorNumber", name));
+      }
+      /*Check if credentials has special characters*/
+      if (!specialCharactersPermit) {
+        regexSpecial = /^[A-Za-z0-9 ]+$/;
+        !regexSpecial.test(credential) &&
+          callback(getCustomErrorMessage("errorSpecialFalse", name));
+      }
+    } else {
+      return callback(getCustomErrorMessage("errorEmpty", cName));
     }
   }
 }
@@ -155,5 +243,6 @@ module.exports = {
   validate,
   checkName,
   checkEmail,
-  checkPassword
+  checkPassword,
+  checkCustom
 };

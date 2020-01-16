@@ -3,7 +3,6 @@ const validator = require("../src/validator");
 var errors = [];
 
 beforeEach(() => {
-  console.table(errors);
   validator.useDefaultSettings();
   errors = [];
 });
@@ -18,7 +17,7 @@ describe("Validate function, default settings", () => {
     validator.validate(user, function(errs) {
       errors = errs;
     });
-    
+
     expect(errors.length).toBe(0);
   });
 });
@@ -35,7 +34,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.checkName(user.name, function(errs) {
       errors.push(errs);
     });
-    
+
     expect(errors[0]).not.toBeFalsy();
   });
   test("nameMax: 3, should return an error", () => {
@@ -46,7 +45,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.checkName(user.name, function(errs) {
       errors.push(errs);
     });
-    
+
     expect(errors[0]).not.toBeFalsy();
   });
   test("passwordMin: 10, should return an error", () => {
@@ -56,7 +55,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.checkPassword(user.password, function(errs) {
       errors.push(errs);
     });
-    
+
     expect(errors[0]).not.toBeFalsy();
   });
   test("passwordMax: 3, should return an error", () => {
@@ -67,7 +66,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.checkPassword(user.password, function(errs) {
       errors.push(errs);
     });
-    
+
     expect(errors[0]).not.toBeFalsy();
   });
   const anotherUser = {
@@ -82,7 +81,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.checkPassword(anotherUser.password, function(errs) {
       errors.push(errs);
     });
-    
+
     expect(errors.length).toBe(0);
   });
   test("passwordMustContainNumber, should not return an error", () => {
@@ -92,7 +91,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.checkPassword(anotherUser.password, function(errs) {
       errors.push(errs);
     });
-    
+
     expect(errors.length).toBe(0);
   });
   const specialCharUser = {
@@ -107,7 +106,7 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.checkPassword(specialCharUser.password, function(errs) {
       errors.push(errs);
     });
-    
+
     expect(errors[0]).not.toBeFalsy();
   });
   test("passwordSpecialCharacters: true, should not return an error", () => {
@@ -117,14 +116,14 @@ describe("checkName, checkEmail and checkPassword functions, different settings,
     validator.checkPassword(specialCharUser.password, function(errs) {
       errors.push(errs);
     });
-    
+
     expect(errors.length).toBe(0);
   });
   test("checkEmail, should not return an error", () => {
     validator.checkEmail(specialCharUser.email, function(errs) {
       errors.push(errs);
     });
-    
+
     expect(errors.length).toBe(0);
   });
 });

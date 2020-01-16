@@ -1,6 +1,6 @@
 {
   "name": "credentials-validator",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "A simple credential validator",
   "main": "./src/validator.js",
   "scripts": {
@@ -18,9 +18,9 @@
   "email": "lucashideki87@gmail.com",
   "author": "EMKBRO",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/HDK101/credentials-validator.git"
-  },  
+    "type": "git",
+    "url": "https://github.com/HDK101/credentials-validator.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "jest": "^24.9.0"

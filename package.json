@@ -7,12 +7,16 @@
     "test": "jest"
   },
   "keywords": [
-    "Validator",
-    "Credentials",
-    "Password",
-    "Email",
-    "Login",
-    "Register"
+    "validator",
+    "credentials",
+    "password",
+    "email",
+    "login",
+    "register",
+    "backend",
+    "frontend",
+    "data",
+    "server"
   ],
   "url": "https://github.com/HDK101/credentials-validator/issues",
   "email": "lucashideki87@gmail.com",

@@ -67,7 +67,7 @@ function validate(user, callback) {
   checkPassword(password, function(error) {
     errors.push(error);
   });
-  if (errors) callback(errors);
+  if (errors.length > 0) callback(errors);
 }
 
 function checkName(name, callback) {

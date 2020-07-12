@@ -124,8 +124,8 @@ validator.checkName("JohnDoe" ,function(errs) {
 validator.checkEmail("john@gmail.com",function(errs) {
   console.log(errs);
 });
-//A method that individually checks an email
-validator.checkEmail("Password10",function(errs) {
+//A method that individually checks an password
+validator.checkPassword("Password10",function(errs) {
   console.log(errs);
 });
 

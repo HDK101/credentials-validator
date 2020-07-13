@@ -13,7 +13,7 @@ var errorMessages = {
   errorNameMin: "Name too short, min length: __VALUE__",
   errorNameMax: "Name too long, max length: __VALUE__",
   errorEmailEmpty: "Empty email!",
-  errorEmailInvalid: "Invalid email adress!",
+  errorEmailInvalid: "Invalid email address!",
   errorPasswordEmpty: "Empty password!",
   errorPasswordMin: "Password too short, min length: __VALUE__",
   errorPasswordMax: "Password too long, max length: __VALUE__",
